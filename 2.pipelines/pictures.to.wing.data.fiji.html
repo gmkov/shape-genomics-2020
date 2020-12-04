@@ -1,0 +1,614 @@
+<!doctype html>
+<html><head><title>From pictures to wing data- Fiji</title><meta charset="UTF-8"><link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,700,700italic|Roboto:400,700,700italic,400italic" rel="stylesheet" type="text/css"><style>/*
+ * Copyright 2014 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    font-size: 15px;
+    color: #333;
+    background: white;
+    padding: 60px 95px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern";
+    font-kerning: normal;
+    -moz-font-feature-settings: "kern";
+    -webkit-font-feature-settings: "kern";
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+th {
+    font-family: Roboto, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 1.25em;
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 35px;
+    line-height: 42px;
+}
+
+h1:first-child {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+h3 {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.capitalize-h3 h3 {
+    text-transform: uppercase;
+}
+
+/* Body text */
+body,
+p,
+ul,
+ol,
+td {
+    font-family: "Crimson Text", serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+blockquote,
+q {
+    display: block;
+    margin: 1em 0;
+    font-style: italic;
+}
+
+blockquote a,
+q a {
+    text-decoration: underline;
+}
+
+blockquote {
+    padding-left: 10px;
+    border-left: 4px solid #a6a6a6;
+}
+
+q {
+    color: #a6a6a6;
+    line-height: 40px;
+    font-size: 24px;
+    text-align: center;
+    quotes: none;
+}
+
+q a {
+    color: #a6a6a6;
+}
+
+code,
+pre {
+    font-family: Consolas, "Liberation Mono", Menlo, "Courier Prime Web",
+        Courier, monospace;
+    background: #f2f2f2;
+}
+
+code {
+    padding: 1px;
+    margin: 0 -1px;
+    border-radius: 3px;
+}
+
+pre {
+    display: block;
+    line-height: 20px;
+    text-shadow: 0 1px white;
+    padding: 5px 5px 5px 30px;
+    white-space: nowrap;
+    position: relative;
+    margin: 1em 0;
+}
+
+pre:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    border-left: solid 1px #dadada;
+}
+
+/* Text Alignment */
+.line {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: end;
+}
+
+/* Lists */
+div[data-section-style="5"],
+div[data-section-style="6"],
+div[data-section-style="7"] {
+    margin: 12px 0;
+}
+
+ul {
+    padding: 0 0 0 40px;
+}
+
+ul li {
+    margin-bottom: 0.4em;
+}
+
+/* Bulleted list */
+div[data-section-style="5"] ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul {
+    list-style-type: square;
+}
+div[data-section-style="5"] ul ul ul ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul ul ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul ul ul ul {
+    list-style-type: square;
+}
+
+/* Numbered list */
+div[data-section-style="6"] ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul {
+    list-style-type: lower-roman;
+}
+div[data-section-style="6"] ul ul ul ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    list-style-type: lower-roman;
+}
+
+/* Checklist */
+div[data-section-style="7"] ul {
+    list-style-type: none;
+}
+
+div[data-section-style="7"] ul li:before {
+    content: "\2610";
+    position: absolute;
+    display: inline;
+    margin-right: 1.2em;
+    margin-left: -1.2em;
+}
+
+div[data-section-style="7"] ul li.parent:before {
+    content: "";
+}
+
+div[data-section-style="7"] ul li.checked {
+    text-decoration: line-through;
+}
+
+div[data-section-style="7"] ul li.checked:before {
+    content: "\2611";
+    text-decoration: none;
+}
+
+/* Tables */
+div[data-section-style="8"] {
+    margin: 12px 0;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border: solid 1px #bbb;
+    table-layout: fixed;
+    position: relative;
+}
+
+table th,
+table td {
+    padding: 2px 2px 0;
+    min-width: 1.5em;
+    word-wrap: break-word;
+}
+
+table th {
+    border-bottom: 1px solid #c7cbd1;
+    background: #f2f2f2;
+    font-weight: bold;
+    vertical-align: bottom;
+    color: #3a4449;
+    text-align: center;
+}
+
+table td {
+    padding-top: 0;
+    border-left: 1px solid #c7cbd1;
+    border-top: 1px solid #c7cbd1;
+    vertical-align: top;
+}
+
+table td.bold {
+    font-weight: bold;
+}
+
+table td.italic {
+    font-style: italic;
+}
+
+table td.underline {
+    text-decoration: underline;
+}
+
+table td.strikethrough {
+    text-decoration: line-through;
+}
+
+table td.underline.strikethrough {
+    text-decoration: underline line-through;
+}
+
+table td:first-child {
+    border-left: hidden;
+}
+
+table tr:first-child td {
+    border-top: hidden;
+}
+
+/* Images */
+div[data-section-style="11"] {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div[data-section-style="11"][data-section-float="0"] {
+    clear: both;
+    text-align: center;
+}
+
+div[data-section-style="11"][data-section-float="1"] {
+    float: left;
+    clear: left;
+    margin-right: 20px;
+}
+
+div[data-section-style="11"][data-section-float="2"] {
+    float: right;
+    clear: right;
+    margin-left: 20px;
+}
+
+div[data-section-style="11"] img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+div[data-section-style="11"].show-border {
+    outline: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+hr {
+    width: 70px;
+    margin: 20px auto;
+}
+
+/* Apps */
+div[data-section-style="19"].placeholder {
+    margin: 0.8em auto;
+    padding: 4px 0;
+    display: block;
+    color: #3d87f5;
+    text-align: center;
+    border: 1px solid rgba(41, 182, 242, 0.2);
+    border-radius: 3px;
+    background: #e9f8fe;
+    font-family: Roboto, sans-serif;
+}
+
+div[data-section-style="19"].first-party-element {
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div[data-section-style="19"].first-party-element.kanban {
+    background-image: url("https://quip-cdn.com/nK0hSyhsb4jrLIL2s5Ma-g");
+    height: 166px;
+}
+
+div[data-section-style="19"].first-party-element.calendar {
+    background-image: url("https://quip-cdn.com/OYujqLny03RILxcLIiyERg");
+    height: 244px;
+}
+
+div[data-section-style="19"].first-party-element.poll {
+    background-image: url("https://quip-cdn.com/fbIiFrcKGv__4NB7CBfxoA");
+    height: 116px;
+}
+
+div[data-section-style="19"].first-party-element.countdown {
+    background-image: url("https://quip-cdn.com/3bPhykD2dBei9sSjCWteTQ");
+    height: 96px;
+}
+
+div[data-section-style="19"].first-party-element.process_bar {
+    background-image: url("https://quip-cdn.com/ybQlHnHEIIBLog5rZmYs_w");
+    height: 36px;
+}
+
+div[data-section-style="19"].first-party-element.project_tracker {
+    background-image: url("https://quip-cdn.com/OFQU087b4Mxzz1ZaHwtjXA");
+    height: 164px;
+}
+
+div[data-section-style="19"] img {
+    margin: 0.5em;
+}
+
+div[data-section-style="19"] img.masked-image {
+    margin: 0;
+    transform-origin: top left;
+}
+
+div[data-section-style="19"] .image-mask {
+    position: relative;
+    overflow: hidden;
+}
+/*
+ * Copyright 2019 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+
+/* Numbered list */
+div[data-section-style="6"] {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+div[data-section-style="6"].list-numbering-continue {
+    counter-reset: none;
+}
+div[data-section-style="6"].list-numbering-restart-at {
+    counter-reset: indent0 var(--indent0) indent1 indent2 indent3 indent4
+        indent5 indent6 indent7 indent8;
+}
+div[data-section-style="6"] ul {
+    /* indent0 is not reset since it is shared across the div elements */
+    list-style-type: none !important;
+}
+div[data-section-style="6"] ul ul {
+    counter-reset: indent1;
+}
+div[data-section-style="6"] ul ul ul {
+    counter-reset: indent2;
+}
+div[data-section-style="6"] ul ul ul ul {
+    counter-reset: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    counter-reset: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    counter-reset: indent5;
+}
+div[data-section-style="6"] ul li {
+    counter-increment: indent0;
+}
+div[data-section-style="6"] ul ul li {
+    counter-increment: indent1;
+}
+div[data-section-style="6"] ul ul ul li {
+    counter-increment: indent2;
+}
+div[data-section-style="6"] ul ul ul ul li {
+    counter-increment: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul li {
+    counter-increment: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul li {
+    counter-increment: indent5;
+}
+div[data-section-style="6"] ul li:before {
+    content: counter(indent0, decimal) ". ";
+}
+div[data-section-style="6"] ul ul li:before {
+    content: counter(indent1, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul li:before {
+    content: counter(indent2, lower-roman) ". ";
+}
+div[data-section-style="6"] ul ul ul ul li:before {
+    content: counter(indent3, decimal) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul li:before {
+    content: counter(indent4, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul ul li:before {
+    content: counter(indent5, lower-roman) ". ";
+}
+</style></head><body><h1 id='NSJACA2O8FJ'>From pictures to wing data- Fiji</h1>
+
+This tutorial allows extracting wing shape and size variables from images taken in standard conditions<br/>
+
+<h2 id='NSJACAnuFjg'>Pre-requisites</h2>
+
+<div data-section-style='5' style="" class=""><ul id='NSJACAMuXMu'><li id='NSJACAy9Vb8' class='' value='1'>Download Fiji (<a href="https://imagej.net/Fiji/Downloads">https://imagej.net/Fiji/Downloads</a>)
+
+<br/></li><li id='NSJACAxVhPX' class='parent'>Download images associated to this paper, two options:
+
+<br/></li><ul><li id='NSJACAeC9qH' class=''>from <a href="https://heliconius.ecdb.io/">Earthcape </a>, by searching for the Unit IDs (individual ids) on the menu Sample Images &gt; Filter List, then paste list of IDs as such “CAM016112_d.JPG” to search. 
+
+<br/></li><li id='NSJACAMwswQ' class=''>from zenodo directly with the links provided in the data section. you can use ‘wget -i’ in the command line to download directly.
+
+<br/></li></ul></ul></div><h2 id='NSJACAcUFtD'>Script overview</h2>
+
+1) set a scale so that the measurements it takes represent real sizes: <br/>
+
+make a line of 5 mm on the ruler → Analyze → Set Scale → change “Known distance” to 5 mm<br/>
+
+<br/>
+
+2) crop the picture up and grab the "rectangle"/wing you want to study<br/>
+
+make a rectangle around the wing → Image → Crop<br/>
+
+<br/>
+
+3) edit the image to enhance the wing edges <br/>
+
+Image → Adjust → change as required<br/>
+
+Process → Enhance contrast (saturated=0)<br/>
+
+<br/>
+
+4) make the image binary (background white, wing black) <br/>
+
+Process → Binary → Options → Set to 25 iterations, Count 1, pad edges when eroding<br/>
+
+Process → Binary → Make binary <br/>
+
+Process → Binary → Fill holes<br/>
+
+<br/>
+
+5) carry out particle analyses (measure the biggest object -wing- size, shape, length etc., create an outline of this object) <br/>
+
+Analyze → Analyze Particles → Set Size to 200-Infinity, Show Outlines, tick: display results, summarize, exclude on edges<br/>
+
+<br/>
+
+6) store results in a csv, export an outline tiff/jpeg of the object(wing) that has been measured (for post-fiji checks)<br/>
+
+<h2 id='NSJACA8vsRp'>Automatization with Macros:</h2>
+
+These steps are written as a macro batch script, Fiji will run the same set of commands on all pictures within a folder (you determine input/output folders). If wanting to reproduce or reuse these scripts first it is recommended to test and understand how macros work.<br/>
+
+<h3 id='NSJACATjQk4'>1. Learn how to write a Macro</h3>
+
+This step is useful, to know how to script a macro and then apply it to a batch of photos, is good to “see” how fiji codes<br/>
+
+<br/>
+
+Open fiji and load an image via File → Open<br/>
+
+<br/>
+
+Go to <b>Plugins → Macros →  Record</b><br/>
+
+This will record what you do. Open an image (one from input 1) with Fiji<br/>
+
+<br/>
+
+Repeat your favourite steps as above and see how the code for the Macro is written<br/>
+
+<h3 id='NSJACAd5fQF'>2. Test your macro script</h3>
+
+Open Fiji<br/>
+
+Click <b>Process &gt; Batch &gt; Macro</b><br/>
+
+Select Input directory (where the images are)<br/>
+
+Select output directory<br/>
+
+Output format JPEG<br/>
+
+<br/>
+
+Then paste your script (edited from the one below according to the script you wrote in step 1)<br/>
+
+<br/>
+
+Click Test (to test it!) - it'll do one image<br/>
+
+When you think things are looking good and the test worked: first COPY AND PASTE your edited version of the script onto a text file, then click PROCESS (and itll do all the images within input1)<br/>
+
+Voila!<br/>
+
+<br/>
+
+<u>These are the scripts used for most images associated to the paper, slight alterations depending on background and light conditions</u><br/>
+
+<pre id='NSJACAN23ui'># grey batch<br>dir="/Users/XXX/size.batch.haplotagging/output1/";<br>name = getTitle; <br>mainTitle=getTitle();<br>makeLine(1749, 3250, 2004, 3248);<br>run("Set Scale...", "distance=255.0078 known=5 pixel=1 unit=mm global");<br>makeRectangle(2596, 4, 2588, 1880);<br>run("Crop");<br>run("Duplicate...", "title=originalimage");<br>selectWindow(mainTitle);<br>run("Options...", "iterations=5 count=1 pad");<br>run("Enhance Contrast...", "saturated=3");<br>setMinAndMax(0, 210);<br>run("RGB Stack");<br>run("Convert Stack to Images")<br>selectWindow("Blue");<br>setThreshold(0, 115);<br>rename(name);<br>run("Convert to Mask", "method=Default background=Light");<br>run("Fill Holes", "stack");<br>run("Fill Holes", "stack");<br>run("Set Measurements...", "area fit shape feret's limit display add redirect=None decimal=3");<br>run("Analyze Particles...", "size=200-Infinity show=Ellipses display exclude summarize record in_situ add");<br>run("Overlay Options...", "stroke=white width=100 fill=none set");<br>roiManager("Set Color", "white");<br>roiManager("Set Line Width", 7);<br>selectWindow("originalimage");<br>roiManager("Show All without labels"); <br>run("Flatten");<br>saveAs("Results",  dir+ "results.csv");<br><br><br></pre>
+
+<br/>
+
+Images with green backgrounds<br/>
+
+<pre id='NSJACA2lf58'>dir="/Users/XXXX/output8/";<br>name = getTitle; <br>mainTitle=getTitle();<br>makeLine(1749, 3250, 2004, 3248);<br>run("Set Scale...", "distance=190.0026 known=5 pixel=1 unit=mm global");<br>makeRectangle(2706, 42, 2436, 1578);<br>run("Crop");<br>run("Duplicate...", "title=originalimage");<br>selectWindow(mainTitle);<br>run("Options...", "iterations=5 count=1 pad");<br>run("Brightness/Contrast...");<br>setMinAndMax(23, 179);<br>run("Subtract Background...", "rolling=50 light sliding disable");<br>run("Gaussian Blur...", "sigma=2");<br>run("RGB Stack");<br>run("Convert Stack to Images")<br>selectWindow("Green");<br>setThreshold(0, 115);<br>rename(name);<br>run("Convert to Mask", "method=Default background=Light");<br>run("Fill Holes", "stack");<br>run("Fill Holes", "stack");<br>run("Set Measurements...", "area fit shape feret's limit display add redirect=None decimal=3");<br>run("Analyze Particles...", "size=200-Infinity show=Ellipses display exclude summarize record in_situ add");<br>run("Overlay Options...", "stroke=white width=100 fill=none set");<br>roiManager("Set Color", "white");<br>roiManager("Set Line Width", 7);<br>selectWindow("originalimage");<br>roiManager("Show All without labels"); <br>run("Flatten");<br>saveAs("Results",  dir+ "results.csv");</pre>
+
+<br/>
+
+<b>Tips: </b>things to edit depending on the wings you have are the saturation levels (in enhance contrast line), the iterations and counts and anything you can image to do to help fiji find a wing (and not the background) when making the image binary. <br/>
+
+<br/>
+
+Fiji will run these steps for each picture in 1-5s (without any user interaction), so in a couple of minutes you can get thousands of wing measurements <br/>
+
+<br/>
+
+Outputs can be checked visually (the white outline is the particle that got analysed by the script):<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/NSJAAARPkGA/kQvLbKAs4DvMCC52n419Hw?a=UTaJfKJQNTCVZIWpHPeaNWzTrvjHralwE0xE0V9fv2Ua' id='NSJACA66ihK' alt='' width='800' height='580'></img></div></body></html>
