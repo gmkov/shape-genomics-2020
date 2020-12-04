@@ -1,0 +1,72 @@
+Mother ID,Mother unit ID,Species,Rearing batch,no offspring phenotyped,Male/female ratio,Locality on Earthcape,Altitude,latitude,longitude
+2,CAM041354,H. e. lativitta,18,6,0.5,Reventador road,1312,-0.01876,-77.52574
+7,CAM041833,H. e. lativitta,18,73,1.1,Reventador road 2,1348,-0.004433,-77.506167
+8,CAM041393,H. e. lativitta,18,12,1.0,Reventador road 2,1348,-0.004433,-77.506167
+10,CAM041429,H. e. lativitta,18,3,2.0,Reventador road 2,1348,-0.004433,-77.506167
+14,CAM041473,H. e. lativitta,18,20,0.7,Limoncocha - El Carmen 1,458,-1.09256,-77.54583
+19,CAM041510,H. e. lativitta,18,4,1.0,Ikiam Mariposario,600,-0.948557,-77.86605
+20,CAM041848,H. e. lativitta,18,35,0.8,Road to Shalcana Loma,429,-1.057317,-77.7018
+21,CAM041568,H. e. lativitta,18,17,1.1,Ikiam Mariposario,600,-0.948557,-77.86605
+22,CAM041585,H. e. lativitta,18,4,1.0,"Reserva Narupa, bridge",1120,-0.724668,-77.767994
+24,CAM041891,H. e. lativitta,18,49,1.0,Ikiam Mariposario,600,-0.948557,-77.86605
+A12,19N1981,H. m. malleti,19-20,15,1.1,San Pedro de Arajuno,405,-1.09759,-77.58389
+A14,19N1694,H. e. lativitta,19-20,8,1.0,San Pedro de Arajuno,405,-1.09759,-77.58389
+A15,19N2783,H. e. lativitta,19-20,15,2.0,San Pedro de Arajuno,405,-1.09759,-77.58389
+A3,18N0651,H. e. lativitta,19-20,3,2.0,San Pedro de Arajuno,405,-1.09759,-77.58389
+A4,19N0270,H. e. lativitta,19-20,22,1.2,San Pedro de Arajuno,405,-1.09759,-77.58389
+A5,19N1211,H. e. lativitta,19-20,4,3.0,San Pedro de Arajuno,405,-1.09759,-77.58389
+E3,19N2117,H. e. lativitta,19-20,14,0.4,Reserva Narupa Bridge,1124,-0.724668,-77.767994
+H2,19N0022,H. e. lativitta,19-20,8,1.7,Challua Yaku Grande,990,-0.718583333,-77.69297222
+K12,19N0326,H. e. lativitta,19-20,14,0.6,Ikiam,615,-0.948557,-77.86605
+K17,19N0695,H. e. lativitta,19-20,17,0.7,Ikiam,615,-0.948557,-77.86605
+K2,20N0613,H. e. lativitta,19-20,14,0.8,Ikiam,615,-0.948557,-77.86605
+K20,19N0981,H. m. malleti,19-20,3,2.0,Ikiam,615,-0.948557,-77.86605
+K23,20N0614,H. e. lativitta,19-20,5,0.3,Ikiam,615,-0.948557,-77.86605
+K24,19N2014,H. e. lativitta,19-20,15,0.5,Ikiam,615,-0.948557,-77.86605
+K33,19N2460,H. e. lativitta,19-20,29,1.2,Ikiam,615,-0.948557,-77.86605
+K34,19N2463,H. e. lativitta,19-20,6,2.0,Ikiam,615,-0.948557,-77.86605
+K7,19N0285,H. e. lativitta,19-20,27,0.5,Ikiam,615,-0.948557,-77.86605
+L1,19N0847,H. e. lativitta,19-20,12,1.4,El Capricho 5.7km,824,-1.187816667,-77.83105
+M1,20N0615 ,H. e. lativitta,19-20,30,1.0,La Mina Negra,1326,-0.720027778,-77.74708333
+M23,19N0341,H. m. malleti,19-20,5,4.0,La Mina Negra,1326,-0.720027778,-77.74708333
+M38,19N0528,H. m. malleti,19-20,6,2.0,La Mina Negra,1326,-0.720027778,-77.74708333
+M39,19N0746,H. m. malleti,19-20,25,1.1,La Mina Negra,1326,-0.720027778,-77.74708333
+M50,19N1034,H. m. malleti,19-20,16,1.0,La Mina Negra,1326,-0.720027778,-77.74708333
+M55,19N1467,H. m. malleti,19-20,11,1.2,La Mina Negra,1326,-0.720027778,-77.74708333
+M59,19N1422,H. m. malleti,19-20,15,1.5,La Mina Negra,1326,-0.720027778,-77.74708333
+N19,19N1995,H. e. lativitta,19-20,27,0.8,Finca Narupa bridge,1150,-0.72516,-77.76736
+N23,19N1633,H. e. lativitta,19-20,10,4.0,Finca Narupa bridge,1150,-0.72516,-77.76736
+N26,20N0609,H. e. lativitta,19-20,18,0.8,Finca Narupa bridge,1150,-0.72516,-77.76736
+N41,20N0616,H. m. malleti,19-20,3,0.5,Finca Narupa bridge,1150,-0.72516,-77.76736
+N42,20N0617,H. m. malleti,19-20,23,1.9,Finca Narupa bridge,1150,-0.72516,-77.76736
+N43,20N0618,H. m. malleti,19-20,37,0.9,Finca Narupa bridge,1150,-0.72516,-77.76736
+N44,19N2510,H. e. lativitta,19-20,39,2.3,Finca Narupa bridge,1150,-0.72516,-77.76736
+N45,20N0619,H. e. lativitta,19-20,3,2.0,Finca Narupa bridge,1150,-0.72516,-77.76736
+N46,19N2483,H. e. lativitta,19-20,4,1.0,Finca Narupa bridge,1150,-0.72516,-77.76736
+N47,19N2784,H. e. lativitta,19-20,8,1.7,Finca Narupa bridge,1150,-0.72516,-77.76736
+P1,19N0150,H. m. malleti,19-20,13,0.6,Rio Pusuno,375,-1.025694444,-77.60475
+P12,19N0314,H. m. malleti,19-20,21,0.9,Rio Pusuno,375,-1.025694444,-77.60475
+P15,19N0007,H. e. lativitta,19-20,13,0.9,Rio Pusuno,375,-1.025694444,-77.60475
+P16,19N0004,H. e. lativitta,19-20,17,1.8,Rio Pusuno,375,-1.025694444,-77.60475
+P19,19N0599,H. m. malleti,19-20,25,0.9,Rio Pusuno,375,-1.025694444,-77.60475
+P28,19N1181,H. e. lativitta,19-20,5,0.7,Rio Pusuno,375,-1.025694444,-77.60475
+P29,19N1395,H. e. lativitta,19-20,12,0.3,Rio Pusuno,375,-1.025694444,-77.60475
+P31,19N1413,H. e. lativitta,19-20,7,0.8,Rio Pusuno,375,-1.025694444,-77.60475
+P35,19N1999,H. e. lativitta,19-20,15,1.1,Rio Pusuno,375,-1.025694444,-77.60475
+P39,19N1895,H. e. lativitta,19-20,14,2.5,Rio Pusuno,375,-1.025694444,-77.60475
+P40,19N1646,H. m. malleti,19-20,12,1.0,Rio Pusuno,375,-1.025694444,-77.60475
+P41,19N2397,H. m. malleti,19-20,37,0.5,Rio Pusuno,375,-1.025694444,-77.60475
+P44,19N2025,H. m. malleti,19-20,30,0.9,Rio Pusuno,375,-1.025694444,-77.60475
+P48,19N2785,H. m. malleti,19-20,11,0.8,Rio Pusuno,375,-1.025694444,-77.60475
+P49,19N2556,H. e. lativitta,19-20,8,0.6,Rio pusuno,375,-1.025694444,-77.60475
+P50,19N2782,H. m. malleti,19-20,27,1.5,Rio pusuno,375,-1.025694444,-77.60475
+T1,19N1123,H. e. lativitta,19-20,4,0.3,Shitig,800,-0.905718,-77.873174
+T2,19N1188,H. e. lativitta,19-20,6,0.2,Shitig,800,-0.905718,-77.873174
+U1,19N0275,H. m. malleti,19-20,25,0.7,cr. Pununo,490,-1.034777778,-77.65658333
+V2,20N0620,H. e. lativitta,19-20,7,0.4,Venecia,432,-0.905718,-77.873174
+W1,19N000,H. m. malleti,19-20,15,1.1,Wildsumaco,1522,-0.674638889,-77.60886111
+W7,20N0621,H. m. malleti,19-20,13,0.6,Wildsumaco,1522,-0.674638889,-77.60886111
+W8,19N0280,H. m. malleti,19-20,31,1.1,Wildsumaco,1522,-0.674638889,-77.60886111
+Y4,19N0670,H. e. lativitta,19-20,10,1.0,Apuya 4km,610,-1.115566667,-77.77833333
+Y6,19N0661,H. e. lativitta,19-20,20,1.9,Apuya 4km,610,-1.115566667,-77.77833333
+Y7,19N0320,H. e. lativitta,19-20,8,0.6,Apuya 4km,610,-1.115566667,-77.77833333
