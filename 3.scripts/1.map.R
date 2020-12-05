@@ -22,7 +22,6 @@ library(wesanderson)
 library(gridExtra)
 #devtools::install_github("dkahle/ggmap")
 library(ggmap)
-register_google(key="AIzaSyAz8Urlhyb4VqYuiy_dBIv-ietj7eY4YBo", write = TRUE)
 options(scipen = 999)
 library(RgoogleMaps)
 library(topoDistance)
@@ -39,6 +38,7 @@ library(cowplot)
 # must register for google APIs (free for education) 
 # https://developers.google.com/maps/documentation/javascript/get-api-key
 # https://lucidmanager.org/data-science/geocoding-with-ggmap/
+register_google(key="YOUR.OWN.PRIVATE.KEY", write = TRUE)
 # enable other apis https://stackoverflow.com/questions/60061173/error-in-ggmap-must-be-an-array-and-http-400-bad-request
 
 ##### functions ##### 
