@@ -43,7 +43,7 @@ register_google(key="YOUR.OWN.PRIVATE.KEY", write = TRUE)
 
 ##### functions ##### 
 #### 0. prep data ####
-setwd("/Users/gabrielamontejokovacevich/Dropbox (Cambridge University)/git/shape-genomics-2020/")
+setwd("/shape-genomics-2020/")
 coll <- read.csv("1.data/4.mothers.haplotagging.formap.csv")
 coll <- subset(coll, !(is.na(latitude)))
 
