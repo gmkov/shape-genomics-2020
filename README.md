@@ -18,6 +18,7 @@ The 3.scripts/ directory contains scripts that can be run to produce the figures
 │   ├── 1.master.era.mel.wild.reared.csv
 │   ├── 2.haplotagging.samples.all.csv
 │   ├── 3.mothers.rearing.for.SI.csv
+│   ├── 4.mothers.haplotagging.formap.csv
 │   └── association
 │       ├── era.479
 │       │   ├── aspect.ratio.txt
@@ -32,7 +33,10 @@ The 3.scripts/ directory contains scripts that can be run to produce the figures
 │   ├── pictures.to.wing.data.fiji.md
 │   └── pictures.to.wing.data.fiji.pdf
 ├── 3.scripts
-│   └── compute50SNP10SNP.windows.R
+│   ├── 1.map.R
+│   ├── 2.common.garden.plots.analyses.R
+│   └── extra
+│       └── compute50SNP10SNP.windows.R
 └── README.md
 
 ```
