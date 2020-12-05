@@ -7,7 +7,7 @@ The code below is not runnable in its current state, as the size of VCF files wi
 
 VCFs for 666 individuals from Meier et al 2020
 
-For each species there are two important files (which can be found in ./1.data/assocation/), which have as many rows as individuals in the sample: 
+For each species there are two important files (which can be found in ./1.data/assocation/) , which have as many rows as individuals in the sample: 
 
 * cov.txt - covariates for association (wing area, sex code (0=male, 1=female), admixture proportion) 
 * aspect.ratio.txt - aspect ratio (elongatedness)
@@ -59,12 +59,12 @@ angsd -yQuant ./1.data/assocation/era.479/aspect.ratio.txt \
  -ref $REF
 
 # Compute window median, min p-values (see short explanation below)
-Rscript ./3.scripts/compute50SNP10SNP.windows.R out/${FILE}.gwas.shape.cov.lrt0.gz
+Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/${FILE}.gwas.shape.cov.lrt0.gz
 
 # output will be "erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos"
 ```
 
-The script 3.scripts/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([github](https://github.com/tavareshugo/WindowScanR)), to obtain median min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
+The script 3.scripts/extra/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([github](https://github.com/tavareshugo/WindowScanR)), to obtain median min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
 
 
 ## 3. Genome-wide permutations
@@ -112,7 +112,7 @@ angsd -yQuant permutations/mel.n187/aspect.ratio.${PERM}.txt \
 -ref $REF
 
 # Compute window medians, min p-values
-Rscript ./3.scripts/compute50SNP10SNP.windows.R out/perm_${PERM}.gwas.shape.cov.lrt0.gz
+Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/perm_${PERM}.gwas.shape.cov.lrt0.gz
 
 
 # to run array job

@@ -9,6 +9,9 @@ Data and scripts associated with the article "Genomics of altitude-associated wi
 
 (will be updated when final scripts are uploaded, and then released to Zenodo for a DOI)
 
+In the pipelines/ section you can find thorough explanations, with chunks of code, for carrying out GWAS/permutations and for obtaining wing morphology data from images. The outputs of these pipelines, which are used for plotting and analyses, are provided in the 1.data/ section.
+
+The 3.scripts/ directory contains scripts that can be run to produce the figures and results presented in the manuscript and supplementary materials.
 
 ```
 ├── 1.data
