@@ -7,7 +7,7 @@ Data and scripts associated with the article "Genomics of altitude-associated wi
 
 ## Contents
 
-(will be updated when final scripts are uploaded)
+(will be updated when final scripts are uploaded, and then released to Zenodo for a DOI)
 
 
 ```
