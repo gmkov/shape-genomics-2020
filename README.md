@@ -23,11 +23,15 @@ The 3.scripts/ directory contains scripts that can be run to produce the figures
 │       ├── era.479
 │       │   ├── aspect.ratio.txt
 │       │   ├── cov.txt
-│       │   └── era.n479.covariates.csv
+│       │   ├── cov3.top1.rows.lrtperm.txt
+│       │   ├── era.n479.covariates.csv
+│       │   └── erato.gwas.shape.cov3.lrt0.gz.50snp.10snp.pos
 │       └── mel.187
 │           ├── aspect.ratio.txt
 │           ├── cov.txt
-│           └── mel.n187.covariates.csv
+│           ├── cov3.top1.rows.lrtperm.txt
+│           ├── mel.n187.covariates.csv
+│           └── melpomene.gwas.shape.cov3.doasso6.50snp.10snp.pos
 ├── 2.pipelines
 │   ├── gwas.permutations.md
 │   ├── pictures.to.wing.data.fiji.md
@@ -38,6 +42,7 @@ The 3.scripts/ directory contains scripts that can be run to produce the figures
 │   └── extra
 │       └── compute50SNP10SNP.windows.R
 └── README.md
+
 
 ```
 

@@ -156,9 +156,9 @@ done
 # concatenate top rows of all permutations
 # copy to keep original, add the rest
 cp shape.gwas.doasso6.cov3.50snp.10snp.top1.rows.txt top1.rows.lrtperm.txt
-`paste ``-``d ``'\t'`` `` top1``.``rows``.``lrtperm``.``txt`` lrt``.``mean``.``perm``*.``txt ``>`` top1``.``rows``.``lrtperm1``.``txt``  ``;`` mv  top1``.``rows``.``lrtperm1``.``txt `` cov3``.``top1``.``rows``.``lrtperm``.``txt`
+`paste ``-``d ``'\t'`` `` top1``.``rows``.``lrtperm``.``txt`` lrt``.``mean``.``perm``*.``txt ``>`` cov3``.``top1``.``rows``.``lrtperm``.``txt`
 
-
+# can be found in  1.data/association/era.479/cov3.top1.rows.lrtperm.txt
 ```
 
 
