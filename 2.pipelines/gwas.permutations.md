@@ -7,7 +7,7 @@ The code below is not runnable in its current state, as the size of VCF files wi
 
 VCFs for 666 individuals from Meier et al 2020
 
-For each species there are two important files, which have as many rows as individuals in the sample: 
+For each species there are two important files (which can be found in ./1.data/assocation/), which have as many rows as individuals in the sample: 
 
 * cov.txt - covariates for association (wing area, sex code (0=male, 1=female), admixture proportion) 
 * aspect.ratio.txt - aspect ratio (elongatedness)

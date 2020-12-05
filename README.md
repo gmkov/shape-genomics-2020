@@ -12,12 +12,25 @@ Data and scripts associated with the article "Genomics of altitude-associated wi
 
 ```
 ├── 1.data
-│   ├── 1.master.era.mel.wild.reared.csv
-│   ├── 2.haplotagging.samples.all.csv
-│   └── 3.mothers.rearing.for.SI.csv
+│   ├── 1.master.era.mel.wild.reared.csv
+│   ├── 2.haplotagging.samples.all.csv
+│   ├── 3.mothers.rearing.for.SI.csv
+│   └── association
+│       ├── era.479
+│       │   ├── aspect.ratio.txt
+│       │   ├── cov.txt
+│       │   └── era.n479.covariates.csv
+│       └── mel.187
+│           ├── aspect.ratio.txt
+│           ├── cov.txt
+│           └── mel.n187.covariates.csv
 ├── 2.pipelines
-│   └── pictures.to.wing.data.fiji.pdf
-└── 3.scripts
+│   ├── gwas.permutations.md
+│   ├── pictures.to.wing.data.fiji.md
+│   └── pictures.to.wing.data.fiji.pdf
+├── 3.scripts
+│   └── compute50SNP10SNP.windows.R
+└── README.md
 
 ```
 
