@@ -7,7 +7,7 @@ The code below is not runnable in its current state, as the size of VCF files wi
 
 VCFs for 666 individuals from Meier et al 2020
 
-For each species there are two important files (which can be found in ./1.data/assocation/) , which have as many rows as individuals in the sample: 
+For each species there are two important files (which can be found in ./1.data/association/) , which have as many rows as individuals in the sample: 
 
 * cov.txt - covariates for association (wing area, sex code (0=male, 1=female), admixture proportion) 
 * aspect.ratio.txt - aspect ratio (elongatedness)
@@ -64,7 +64,7 @@ Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/${FILE}.gwas.shape.cov
 # output will be "erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos"
 ```
 
-The script 3.scripts/extra/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([github](https://github.com/tavareshugo/WindowScanR)), to obtain median min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
+The script 3.scripts/extra/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([github](https://github.com/tavareshugo/WindowScanR)), to obtain min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
 
 
 ## 3. Genome-wide permutations
@@ -111,7 +111,7 @@ angsd -yQuant permutations/mel.n187/aspect.ratio.${PERM}.txt \
 -P 8 -model 1 -cov ./1.data/assocation/era.479/cov.txt \
 -ref $REF
 
-# Compute window medians, min p-values
+# Compute window medians, min p-values, same as with observed data
 Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/perm_${PERM}.gwas.shape.cov.lrt0.gz
 
 
@@ -124,9 +124,9 @@ sbatch --array 1-200 perm.assoc.sh
 
 ### Extract outlier windows from permutations
 
-Only extract permutation p-values from a list of outlier windows/SNPs  from the observed data GWAS (top 1%, rather than working with the whole genome, as it would be too much data to handle locally. This is concatenated into a single file with the 200 permutations as columns, and the outlier windows as rows. 
+Only extract permutation p-values from a list of outlier windows/SNPs  from the observed data GWAS (top 1%, rather than working with the whole genome, as it would be too much data to handle locally. This is then concatenated into a single file with the 200 permutations as columns, and the outlier windows as rows (and the corresponding median p-values per window as values). 
 
-Obtain in R row numbers that correspond to the windows with the top 1% associtions (i.e. p-values above 99th percentile)
+Obtain in R row numbers that correspond to the windows with the top 1% associtions (i.e. median p-values above 99th percentile)
 
 ```
 era.shape.gwas <- read.table("./1.data/assocation/era.479/erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos", row.names = NULL, header = F )
@@ -165,7 +165,7 @@ cp shape.gwas.doasso6.cov3.50snp.10snp.top1.rows.txt top1.rows.lrtperm.txt
 
 ### Rank observed p-value among empirical (permutated) p-values
 
-Now in R again, import the median p-values from 200 permutaitons (200 values per outlier window), add the observed values (real p-values), and rank them. The observed value ranking will determine where in the null distribution it falls, we will only consider significant those above the 99th percentile (i.e. with a ranking of 1/200 or 2/200). 
+Now in R again, import the median p-values from 200 permutations (200 values per outlier window), add the observed values (real p-values), and rank them. The observed value ranking will determine where in the null distribution it falls, we will only consider significant those above the 99th percentile (i.e. with a ranking of 1/201 or 2/201). 
 
 ```
 perm.era <- read.table("cov3.top1.rows.lrtperm.txt", blank.lines.skip = T)
@@ -199,7 +199,7 @@ era.shape.gwas$outlier.ranking.permutation200 <- obvs.era.long.rank$rank[match(e
 
 Grab minimum p-value per permutation (genome-wide), store. The 95th percentile will give a genome-wide threshold at p=0.05, presented in the SI Fig. S11.
 
-Not very realistic for per site null distributions, as in every gwas of 25 million snps there will be some spuriously low p-values. 
+Not very realistic for per site null distributions, as in every gwas of 25 million snps there will be some spuriously low p-values in each genome-wide permutation. 
 
 ```
 # use p value min per window, column8, equivalent to finding minimum p-value genome wide (but faster)
