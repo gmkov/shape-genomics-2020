@@ -1,4 +1,4 @@
-# GWAS (ANGSD), permutations
+# GWAS (ANGSD) and permutations
 
 This pipeline outlines the necessary steps to run the GWAS and permutations.
 The code below is not runnable in its current state, as the size of VCF files will require running the pipeline on a computing cluster, which vary widely in specifications.
@@ -19,9 +19,9 @@ Make sure VCF order of individuals matches covariates order (I always use ascend
 Obtain admixture proportions to control for population structure in the GWAS. Install NGSadmix from [here](http://www.popgen.dk/software/index.php/NgsAdmix), 
 
 ```
-# by Joana Meier
 module load htslib/1.2.1 bcftools-1.9-gcc-5.4.0-b2hdt5n samtools/1.3.1 vcftools
 
+# by Joana Meier: 
 # replace with your file prefix
 file=erato
 # Fix the missing genotypes (they need a PL)
@@ -42,7 +42,7 @@ cut -f 1 -d " " $file.maf0.05.K2.qopt > NGSadmix.prop
 
 ## 2. ANGSD association
 
-Current version has fixed vcf reading [angsd version: 0.933-101-g7ea6e4b (htslib: 1.10.2-131-g0456cec) build(Aug 24 2020 10:35:22)]- however, you have to use the option to **-vcf-pl ** to specify we have PL likelihoods in our vcfs.
+Current version of ANGSD has fixed vcf reading [angsd version: 0.933-101-g7ea6e4b (htslib: 1.10.2-131-g0456cec) build(Aug 24 2020 10:35:22)]- however, you have to use the option to **-vcf-pl** to specify we have PL likelihoods in our vcfs.
 
 
 ```
@@ -62,9 +62,10 @@ angsd -yQuant ./1.data/assocation/era.479/aspect.ratio.txt \
 Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/${FILE}.gwas.shape.cov.lrt0.gz
 
 # output will be "erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos"
+
 ```
 
-The script 3.scripts/extra/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([github](https://github.com/tavareshugo/WindowScanR)), to obtain min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
+The script 3.scripts/extra/compute50SNP10SNP.windows.R takes the output from ANGSD, calculates p.values from likelihood ratio test statistic (chi2 distribution, 1df) and creates sliding windows of 50SNP and 10SNP steps (fixed) with the R package winscanr ([](https://github.com/tavareshugo/WindowScanR)[tavareshugogithub](https://github.com/tavareshugo)), to obtain min, max, and median values from two columns: LRT.pval (p.values per snp) and position (to obtain mininum and maximum position)
 
 
 ## 3. Genome-wide permutations
@@ -114,7 +115,6 @@ angsd -yQuant permutations/mel.n187/aspect.ratio.${PERM}.txt \
 # Compute window medians, min p-values, same as with observed data
 Rscript ./3.scripts/extra/compute50SNP10SNP.windows.R out/perm_${PERM}.gwas.shape.cov.lrt0.gz
 
-
 # to run array job
 sbatch --array 1-200 perm.assoc.sh
 
@@ -122,80 +122,39 @@ sbatch --array 1-200 perm.assoc.sh
 
 
 
-### Extract outlier windows from permutations
+### Rank observed p-values among empirical (permutated) p-values
 
-Only extract permutation p-values from a list of outlier windows/SNPs  from the observed data GWAS (top 1%, rather than working with the whole genome, as it would be too much data to handle locally. This is then concatenated into a single file with the 200 permutations as columns, and the outlier windows as rows (and the corresponding median p-values per window as values). 
+First extract all median p-values of all windows and permutations.
 
-Obtain in R row numbers that correspond to the windows with the top 1% associtions (i.e. median p-values above 99th percentile)
-
-```
-era.shape.gwas <- read.table("./1.data/assocation/era.479/erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos", row.names = NULL, header = F )
-# add correct row number (which in the cluster includes the title)
-era.shape.gwas$row.number<- 2:(nrow(era.shape.gwas)+1); tail(era.shape.gwas$row.number)
-
-# get top 1% associated windows (lowest median p-values)
-era.shape.top1.lrt <- subset(subset(era.shape.gwas), LRT.pval_median < quantile(na.rm = TRUE,LRT.pval_median, prob = 1 - 99/100)); head(era.shape.top1.lrt)
-
-#make list of rows that correspond to highest lrt. will use these to extract from permutations
-rows.to.extract <- era.shape.top1.lrt$row.number; tail(rows.to.extract ); head(rows.to.extract)
-write.table(rows.to.extract, "era.n479/shape.gwas.doasso6.cov3.50snp.10snp.top1.rows.txt", row.names = F, col.names = F)
+Then the R script 3.scripts/extra/perm.ranking.R will import the median p-values from 200 permutations (200 values per outlier window), add the observed values (real p-values), and rank all p-values per window (observed +permuted, total=201). The observed value ranking will determine where in the null distribution it falls, we will only consider significant those above the 99th percentile (i.e. with a ranking of 1/201 or 2/201). 
 
 
 ```
+`# extract the column (i.e. all windows/rows) with median p-values from each permutation (careful col names may be shifted)`
+`for`` i ``in`` perm_``*.``gwas``.``shape``.``cov``.``lrt0``.``gz``.``50snp``.``10snp``.``pos`
+`do`
+`n``=``$``{``i``:``5``:``3``}`
+`awk ``-``F ``'\t'`` ``'{ print $10}'`` $i ``|`` column ``-``t ``>`` lrt``.``median``.``all``.``rows``.``perm$n``.``txt`
+`done`
 
-Then extract from each permutation, the median p-value corresponding to those windows (rows)
+`# concatenate all rows of all permutations`
+`paste ``-``d ``'\t'``  lrt``.``median``.``all``.``rows``.``perm``*.``txt ``>`` cov3``.``all``.``rows``.``lrtperm``.``txt`
 
-```
-# get top1% rows for lrt.pval_median (CAREFUL COLUMN NUMBER, here column 10) for each permutation
-for i in perm_*.gwas.shape.cov.lrt0.gz.50snp.10snp.pos
-do
-n=${i:5:3}
-awk 'NR == FNR{a[$0]; next};FNR in a {print $10}' shape.gwas.doasso6.cov3.50snp.10snp.top1.rows.txt $i | column -t > lrt.mean.perm$n.txt
-done
+`# check correct number of columns, 200`
+`awk ``-``F``'\t'`` ``'{print NF; exit}'`` cov3``.``all``.``rows``.``lrtperm``.``txt`
 
-# concatenate top rows of all permutations
-# copy to keep original, add the rest
-cp shape.gwas.doasso6.cov3.50snp.10snp.top1.rows.txt top1.rows.lrtperm.txt
-`paste ``-``d ``'\t'`` `` top1``.``rows``.``lrtperm``.``txt`` lrt``.``mean``.``perm``*.``txt ``>`` cov3``.``top1``.``rows``.``lrtperm``.``txt`
+`# run r in a cluster with:`
+`# input1- concatenated permutation results and`
+`# input 2- observed gwas results`
+`nice ``Rscript`` ``../../../../``scripts``/``perm``.``ranking``.``R  cov3``.``all``.``rows``.``lrtperm``.``txt erato.gwas.shape.cov.lrt0.gz.50snp.10snp.pos`` ``&>`` perm``.``ranking``.``out``&`
 
-# can be found in  1.data/association/era.479/cov3.top1.rows.lrtperm.txt
-```
-
-
-
-### Rank observed p-value among empirical (permutated) p-values
-
-Now in R again, import the median p-values from 200 permutations (200 values per outlier window), add the observed values (real p-values), and rank them. The observed value ranking will determine where in the null distribution it falls, we will only consider significant those above the 99th percentile (i.e. with a ranking of 1/201 or 2/201). 
-
-```
-perm.era <- read.table("cov3.top1.rows.lrtperm.txt", blank.lines.skip = T)
-
-## give permutations sensible names
-colnames(perm.era)<- c("row", 1:200); head(perm.era)
-
-# collapse permutations long format
-perm.era.long <-gather(perm.era, perm, LRT_mean,-row)  ; names(perm.era.long)
-
-# create df from observed data to add to permutations
-to.add <- data.frame(row=era.shape.top1.lrt[,27], perm="observed", LRT_mean=era.shape.top1.lrt[,7]);names(to.add)
-
-# add
-perm.obvs.era.long <- rbind(perm.era.long,to.add)
-
-# rank perm/obvserved within windows (i.e. row)
-perm.obvs.era.long.rank <- perm.obvs.era.long %>%
-  dplyr::group_by(row) %>%
-  dplyr::mutate(rank = order(order(LRT_mean, decreasing=TRUE)))
-obvs.era.long.rank <- subset(perm.obvs.era.long.rank, perm=="observed")
-
-# add ranking to main df for plotting
-era.shape.gwas$outlier.ranking.permutation200 <- obvs.era.long.rank$rank[match(era.shape.gwas$row.number, obvs.era.long.rank$row)]
 
 ```
 
 
 
-### Alternative: extract lowest p-value per permutation
+
+### For SI: extract lowest p-value per permutation
 
 Grab minimum p-value per permutation (genome-wide), store. The 95th percentile will give a genome-wide threshold at p=0.05, presented in the SI Fig. S11.
 
@@ -208,6 +167,53 @@ for i in perm_*.gwas.shape.cov.lrt0.gz.50snp.10snp.pos; do awk 'NR==1 || $8 < mi
 ```
 
 ##  
+
+## For SI Fig. S11: LD decay
+
+First thin the full vcf snp dataset, so subsample snps that are at least XXbp apart → median size of our 50SNP windows which corresponds to:
+
+* erato 1200bp
+* melpomene 1032bp
+
+```
+`ERA_VCF``=erato``.``vcf``.``gz`
+MEL_VCF=melpomene.vcf.gz
+
+module load vcftools
+vcftools --gzvcf $ERA_VCF --thin 1200 --out ./era.thinned1200  `--``recode `&
+vcftools --gzvcf $MEL_VCF --thin 1032 --out ./mel.thinned1032  --recode &
+
+```
+
+
+Obtain r2 between snps with plink
+
+```
+# --ld-window-kb max size chr, so that comparisons always on diff chromosomes
+# chr1scaff1 era 22318219
+# chr1scaff1 mel 17205807
+# min r2 values based on previous studies (Martin et al 2019, Van Belleghem et al 2017)
+module load plink
+`plink ``--``vcf`` ``era``.``thinned1200``.``recode``.``vcf``  ``--``r2 ``--``ld``-``window``-``kb ``22318`` ``--``ld``-``window``-``r2 ``0.05`` ``--``ld``-``window ``999999`` ``--``allow``-``extra``-``chr ``--``set``-``missing``-``var``-``ids ``@:#`` ``--``threads ``20`` ``--``out`` era``.``vcf``.``thinned``.``22318kb``.``minr2``.``0.05`
+plink --vcf mel.thinned1032.recode.vcf  --r2 --ld-window-kb 17205 --ld-window-r2 0.2 --ld-window 999999 --allow-extra-chr --set-missing-var-ids @:# --threads 20 --out mel.vcf.thinned.17205kb.minr2.0.2
+
+nohup nice bash ld.plink.era.sh &> ld.plink.era.sh.out & 
+nohup nice bash ld.plink.mel.sh &> ld.plink.mel.sh.out & 
+
+# remove lines that contain Herato02- large inversion skews ld decay
+sed '/Herato02/d' era.vcf.thinned.22318kb.minr2.0.05.ld >era.vcf.thinned.22318kb.minr2.0.05.minuschr02.ld
+
+# get out distance between snps
+cat mel.vcf.thinned.17205kb.minr2.0.2.ld | sed 1,1d | awk -F " " 'function abs(v) {return v < 0 ? -v : v}BEGIN{OFS="\t"}{print abs($5-$2),$7}' | sort -k1,1n > mel.vcf.thinned.17205kb.minr2.0.2.summary
+cat era.vcf.thinned.22318kb.minr2.0.05.minuschr02.ld | sed 1,1d | awk -F " " 'function abs(v) {return v < 0 ? -v : v}BEGIN{OFS="\t"}{print abs($5-$2),$7}' | sort -k1,1n > era.vcf.thinned.22318kb.minr2.0.05.minuschr02.ld.summary
+
+```
+
+
+
+
+
+
 
 
 

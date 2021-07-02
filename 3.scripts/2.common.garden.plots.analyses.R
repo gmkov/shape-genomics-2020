@@ -455,12 +455,12 @@ piecewiseSEM::rsquared((m3.lmer))
 ############### 2.3 anova / repeatability   #####
 # size
 size.aov<-aov(area ~ mother.id, data = subset(df.more3, species=="H. erato") ); summary(size.aov)
-rep.size<- rpt(area  ~ area+sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
+rep.size<- rpt(area  ~ sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
                 nboot = 100, data=subset(era.df.more3, species=="erato") ); print(rep.size) ; plot(rep.size, cex.main = 1)
 
 size.aov<-aov(area ~ mother.id, data = subset(df.more3, species=="H. melpomene") ); summary(size.aov)
-rep.size<- rpt(area  ~ area+sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
-                nboot = 100, data=subset(df.more3, mother.id!=""&species=="H. melpomene"&type.reared=="reared") ); print(rep.size) ; plot(rep.size, cex.main = 1)
+rep.size<- rpt(area  ~ sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
+                nboot = 100, data=subset(mel.df.more3) ); print(rep.size) ; plot(rep.size, cex.main = 1)
 
 # shape
 shape.aov<-aov(aspect.ratio ~ mother.id, data = subset(df.more3, species=="H. erato") ); summary(shape.aov)
@@ -468,7 +468,7 @@ rep.shape<- rpt(aspect.ratio  ~ area.scaled +altitude.type+ dev.time.scaled+ sex
                 nboot = 100, data=subset(era.df.more3, species=="erato") ); print(rep.shape) ; plot(rep.shape, cex.main = 1)
 
 shape.aov<-aov(aspect.ratio ~ mother.id, data = subset(df.more3, species=="H. melpomene") ); summary(shape.aov)
-rep.shape<- rpt(aspect.ratio  ~ area.scaled +altitude.type+  sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
+rep.shape<- rpt(aspect.ratio  ~ area +altitude.type+  sex+(1|mother.id), grname=c("mother.id"), datatype="Gaussian", 
                 nboot = 100, data=subset(mel.df.more3, species=="melpomene")  ); print(rep.shape) ; plot(rep.shape, cex.main = 1)
 
 
