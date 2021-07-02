@@ -6,7 +6,7 @@ Data and scripts associated with the article "Genomics of altitude-associated wi
 
 ## Contents
 
-Most data files required to run the analyses are found within 1.data/. Large output files are hosted in dropbox (listed below in the tree but not uploaded to github), but can be obtained by running the pipelines in 2.pipelines/.
+Most data files required to run the analyses are found within 1.data/. Large output files are hosted in dropbox (listed below in the tree but some not uploaded to github, others hosted by git LFS), but can be obtained by running the pipelines in 2.pipelines/.
 
 Dropbox links for large files (optional):
 [1.data/association/erato.gwas.shape.cov3.lrt0.gz.10snp.10snp.pos.ranks.short](https://www.dropbox.com/s/qkn777ap6069fzy/erato.gwas.shape.cov3.lrt0.gz.10snp.10snp.pos.ranks.short?dl=0)
@@ -69,3 +69,7 @@ The 3.scripts/ directory contains scripts that can be run to produce the figures
 │ └── perm.ranking.R
 └── README.md
 ```
+
+
+
+
