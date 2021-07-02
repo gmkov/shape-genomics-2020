@@ -22,6 +22,7 @@ In the 2.pipelines/ section you can find thorough explanations, with chunks of c
 
 The 3.scripts/ directory contains scripts that can be run to produce the figures and results presented in the manuscript and supplementary materials.
 
+Any questions or requests please contact me (email on my github profile)
 
 ```
 ├── 1.data
