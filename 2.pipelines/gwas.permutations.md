@@ -151,9 +151,6 @@ Then the R script 3.scripts/extra/perm.ranking.R will import the median p-values
 
 ```
 
-
-
-
 ### For SI: extract lowest p-value per permutation
 
 Grab minimum p-value per permutation (genome-wide), store. The 95th percentile will give a genome-wide threshold at p=0.05, presented in the SI Fig. S11.
